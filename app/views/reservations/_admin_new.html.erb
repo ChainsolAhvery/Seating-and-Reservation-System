@@ -1,0 +1,27 @@
+<!-- Created 4/23/2020 by Alli Hornyak -->
+<!--Edited 4/19/2020 by Alli Hornyak: Added entry forms -->
+<!--Edited 4/22/2020 by Alli Hornyak: Edited entry forms to not include nesting and redesign forms -->
+<!--Edited 4/22/2020 by Nick Harvey: Added name, email, phone number to entry forms -->
+<!--Edited 4/23/2020 by Alli Hornyak: moved code from new.html.erb and change label names-->
+<!-- Edited 4/23/2020 by Nick Harvey: CSS and HTML styling -->
+<!-- Edited 4/24/2020 by Alli Hornyak: Add required to forms requried to make a reservation and limit date selection-->
+<!-- Edited 4/24/2020 by Tze Hei Tam: Redid time field and added min to party size-->
+
+<div class="main">
+    <%= button_to "Back to Reservations", reservations_path, method: 'get', class: "btn btn-default btn-primary" %>
+    <h2>Create Reservation</h2>
+    <div class="container-fluid">
+        <div class="col-md-12">
+        <%= form_for @reservation do |f| %>
+            <p>Reservation Name:<br> <%= f.text_field :name, required: true%></p>
+            <p>Customer Email:<br> <%= f.text_field :email, required: true %></p>
+            <p>Customer Phone Number:<br> <%= f.text_field :phone_num, required: true %></p>
+            <p>Reservation Date:<br> <%= f.date_field :date, min: Date.today, required: true %></p>
+            <p>Reservation Time:<br> <%= f.time_select :time, include_seconds: false  %></p>
+            <p>Party Size:<br> <%=f.number_field :party_size, required: true, min: 1 %></p>
+            <p>Special Requests:<br> <%=f.text_area :special_requests %></p>
+            <%= f.submit %>
+        <% end %>
+        </div>
+    </div>
+</div>

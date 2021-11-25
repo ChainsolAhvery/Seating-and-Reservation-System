@@ -1,0 +1,47 @@
+<!-- Edited 4/22/2020 by Tze Hei Tam: Redid header and added margins -->
+<!-- Edited 4/23/2020 by Nick Harvey: CSS and HTML styling -->
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Project6TheInternetExplorers</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <!-- Load React. -->
+    <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
+    <script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  </head>
+
+  <body>
+    <!-- Add sign-in/sign-out and registration links -->
+    <%# HEADER %>
+    <div class="row p-1 nav">
+      <div class="col-md-9">
+        <div class="page-header">
+        <br>
+          <h1>
+            The Internet Explorers Cafe: <small>Seating Management System</small>
+          </h1>
+        </div>
+      </div>
+      <div class="col-md-3">
+        <div class="row float-left">
+          <div class="btn-group-vertical">
+              <button class="btn btn-sm m-3" type="button">
+                  <%= render 'devise/menu/registration_items' %>
+              </button>
+
+              <button class="btn btn-sm m-3" type="button">
+                  <%= render 'devise/menu/login_items' %>
+              </button>
+          </div> 
+        </div>
+      </div>
+	  </div>
+	  <div class="m-5">
+        <%= yield %>
+    </div>
+  </body>
+</html>

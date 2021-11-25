@@ -1,0 +1,218 @@
+<%# Edited 4/18/2020 by Emily Niehaus: insert React header element %>
+<%# Edited 4/19/2020 by Emily Niehaus: Create rows, cols, tables, and buttons%>
+
+<div id="header"></div>
+
+<div class="container-fluid ">
+	<%# HEADER %>
+    <div class="row p-5 bg-info">
+		<div class="col-md-9">
+			<div class="page-header">
+				<h2>
+					The Internet Explorers Cafe: <small>Seating Management System</small>
+				</h2>
+			</div>
+		</div>
+		<div class="col-md-3">
+			<div class="row float-right">
+                <div>
+                    <p class="d-inline m-3">
+                        Current User: user
+                    </p>
+                    <button class="btn btn-sm d-inline m-3" type="button">
+                        Log Out
+                    </button>
+                </div>
+            </div>	 
+            <button class="btn btn-sm float-right" type="button">
+                Management Settings
+            </button> 
+		</div>
+	</div>
+
+    
+	<div class="row mr-5 ml-5">
+		<%# CURRENT SEATING TABLE %>
+        <div class="col-md-12">
+			<div class="row">
+                <div>
+                    <h3 class="d-inline m-3">
+                        Current Seating
+                    </h3>
+                    <button class="btn d-inline m-3" type="button">
+                        View Seating Map
+                    </button>
+                </div>
+            </div> 
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Table
+						</th>
+						<th>
+							Type
+						</th>
+						<th>
+							Accessible?
+						</th>
+						<th>
+							# Seats
+						</th>
+                        <th>
+                            Party Name
+                        </th>
+                        <th>
+                            Seated at:
+                        </th>
+					</tr>
+				</thead>
+				<tbody>
+					<%# Insert ruby code here to loop over all active tables %>
+                    <tr>
+						<td>
+							1
+						</td>
+						<td>
+							Booth
+						</td>
+						<td>
+							yes
+						</td>
+						<td>
+							4
+						</td>
+						<td>
+							Emily
+						</td>
+						<td>
+							4:57 PM
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="row m-5">
+		<%# QUEUE %>
+        <div class="col-md mr-5">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>
+						Queue
+					</h3>
+				</div>
+				<div class="col-md-4">
+					 
+					<button type="button" class="btn btn-success">
+						Add to Queue
+					</button>
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Arrival Time
+						</th>
+						<th>
+							Party
+						</th>
+						<th>
+							Size
+						</th>
+						<th>
+							Requests
+						</th>
+                        <th>
+							Phone
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+                    <%# Insert ruby code here to loop over all customers in the queue %>
+					<tr>
+						<td>
+							10:32 AM
+						</td>
+						<td>
+							Claire
+						</td>
+						<td>
+							2
+						</td>
+						<td>
+							none
+						</td>
+						<td>
+							123-456-7890
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		
+        <%# RESERVATIONS %>
+        <div class="col-md">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>
+						Reservations
+					</h3>
+				</div>
+				<div class="col-md-4">
+					 
+					<button type="button" class="btn btn-success">
+						Add New
+					</button>
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Reservation Time
+						</th>
+						<th>
+							Party
+						</th>
+						<th>
+							Size
+						</th>
+						<th>
+							Requests
+						</th>
+                        <th>
+							Phone
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td>
+							11:00 AM
+						</td>
+						<td>
+							Jake
+						</td>
+						<td>
+							3
+						</td>
+						<td>
+							booth
+						</td>
+						<td>
+							123-456-7890
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<%= javascript_include_tag 'header', 'data-turbolinks-track': 'reload' %>

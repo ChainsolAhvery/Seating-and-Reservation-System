@@ -1,0 +1,234 @@
+<%# Edited 4/18/2020 by Emily Niehaus: insert React header element %>
+<%# Edited 4/19/2020 by Emily Niehaus: Create rows, cols, tables, and buttons%>
+<%# Edited 4/22/2020 by Emily Niehaus: move into partial %>
+<%# Edited 4/23/2020 by Tze Hei Tam: filled out queue and reservation lists %>
+<%# Edited 4/23/2020 by Alli Hornyak: add edit/delete buttons and link new res%>
+<%# Edited 4/23/2020 by Nick Harvey: CSS and HTML styling %>
+<%# Edited 4/23/2020 by Tze Hei Tam: Redid table buttons to interact with model%>
+<%# Edited 4/24/2020 by Nina Yao: Redid accessible so that it is not hardcoded%>
+<%# Edited 4/24/2020 by Alli Hornyak: fixed date/time displayed %>
+<%# Edited 4/24/2020 by Emily Niehaus: Add seating layout popup and image %>
+
+
+
+<div class="container-fluid ">
+	<div class="row mr-5 ml-5">
+		<%# CURRENT SEATING TABLE %>
+        <div class="col-md-12 main">
+			<div class="row">
+                <div>
+                    <h3 class="d-inline m-3">
+                        Current Seating
+                    </h3>			
+
+					<button type="button" class="btn d-inline m-3" data-toggle="modal" data-target="#myModal">
+						View Seating Map
+					</button>
+
+					<div id="myModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-body">
+									<img src="/tablelayout.jpg" class="img-responsive" width="450">
+									<p>TO EXIT: click anywhere outside of box.</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+                </div>
+            </div> 
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Table
+						</th>
+						<th>
+							Type
+						</th>
+						<th>
+							Accessible?
+						</th>
+						<th>
+							# Seats
+						</th>
+                        <th>
+                            Status:
+                        </th>
+					</tr>
+				</thead>
+				<tbody>
+                    <% @tables.each do |t| %>
+						<tr>
+							<td><%= t.id %></td>
+							<td><%= t.table_type %></td>
+							<td><% if t.accessible %>
+								Yes
+							<% else %>
+								No
+							<% end %>
+							</td>
+							<td><%= t.num_seats %></td>
+							<td>
+                                <span>
+                                <% if t.is_available %>
+                                Available
+                                <%= button_to "Assign", table_path(t), method: 'put', class: "btn btn-default btn-primary" %>
+                                <% else %>
+                                Assigned
+                                <%= button_to "Dismiss", table_path(t), method: 'put', class: "btn btn-default btn-primary" %>			
+                                <% end %>
+                                </span>					
+							</td>
+						</tr>
+					<% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+
+	<div class="row m-5">
+		<%# QUEUE %>
+        <div class="col-md mr-5 main">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>
+						Queue For Today
+					</h3>
+				</div>
+				<div class="col-md-4">
+					<!-- <%= button_to "Add to Queue", new_reservation_path, method: 'get', class: "btn btn-default btn-primary" %>
+					<button type="button" class="btn btn-success">
+						Add to Queue
+					</button>-->
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Arrival Time
+						</th>
+						<th>
+							Party
+						</th>
+						<th>
+							Size
+						</th>
+						<th>
+							Requests
+						</th>
+                        <th>
+							Phone
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				    <% if !@queue.nil? %>
+                        <% @queue.each do |reservation| %>
+					    <tr>
+						    <td>
+							    <%= reservation.time.to_s(:time) %>
+						    </td>
+						    <td>
+							    <%= reservation.name %>
+						    </td>
+						    <td>
+							    <%= reservation.party_size %>
+						    </td>
+						    <td>
+							    <%= reservation.special_requests %>
+						    </td>
+						    <td>
+							    <%= reservation.phone_num %>
+						    </td>
+								<td>
+                    <%= button_to "Edit", edit_reservation_path(reservation), method: 'get', class: "btn btn-default btn-primary" %>
+                </td>
+                <td>
+                    <%= button_to 'Delete', reservation_path(reservation), method: 'delete', class: "btn btn-default btn-primary" %>
+                </td>
+					    </tr>
+					    <% end %>
+			        <% end %>
+				</tbody>
+			</table>
+		</div>
+		
+        <%# RESERVATIONS %>
+        <div class="col-md main">
+			<div class="row">
+				<div class="col-md-8">
+					<h3>
+						All Reservations
+					</h3>
+				</div>
+				<div class="col-md-3">
+					 
+					<!--<button type="button" class="btn btn-success">
+						Add New
+					</button> -->
+						<%= button_to "Add New", new_reservation_path, method: 'get', class: "btn btn-default btn-primary" %> 
+				</div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>
+							Reservation Time
+						</th>
+						<th>
+							Party
+						</th>
+						<th>
+							Size
+						</th>
+						<th>
+							Requests
+						</th>
+                        <th>
+							Phone
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+				    <% if !@reservations.nil? %>
+                        <% @reservations.each do |reservation| %>
+					    <tr>
+						    <td>
+									<%= reservation.date.to_s %>
+							    <%= reservation.time.to_s(:time) %>
+						    </td>
+						    <td>
+							    <%= reservation.name %>
+						    </td>
+						    <td>
+							    <%= reservation.party_size %>
+						    </td>
+						    <td>
+							    <%= reservation.special_requests %>
+						    </td>
+						    <td>
+							    <%= reservation.phone_num %>
+						    </td>
+								<td>
+                    <%= button_to "Edit", edit_reservation_path(reservation), method: 'get', class: "btn btn-default btn-primary" %>
+                </td>
+                <td>
+                    <%= button_to 'Delete', reservation_path(reservation), method: 'delete', class: "btn btn-default btn-primary" %>
+                </td>
+					    </tr>
+					    <% end %>
+			        <% end %>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</div>
+
+
+
+<%= javascript_include_tag 'status', 'data-turbolinks-track': 'reload' %>
