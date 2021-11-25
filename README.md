@@ -5,6 +5,8 @@
 ### General Info
 A web application that lets customers make reservations at a restaurant and lets restaurant owners view/change their reservations as well as assign tables.
 
+Original contributions are preserved as my former teammates deserve credit for their hard work, of course. If you see this, I hope you're doing well! Talk about a COVID artifact, am I right?
+
 
 ### Features
 * Customers will be able to:
@@ -27,6 +29,8 @@ A web application that lets customers make reservations at a restaurant and lets
 
 
 ### How to run
+Note: Node.js is required to run this application.
+
 To clone and run this application, a machine with Git installed will be necessary.
 From the command line, run the following commands:
 
